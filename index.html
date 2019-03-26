@@ -17,8 +17,16 @@
 
             function playerPlay ()      //prompting pleer to choose his object
             {
-                let playerChoise = prompt("Your choice?");
-                return capitalixe(playerChoise);
+                let playerChoise;
+                do
+                {
+                    playerChoise = prompt("Please choose Rock, Paper or Scissors - >");
+                    if (playerChoise != "")
+                    {
+                        playerChoise = capitalixe(playerChoise)
+                    }
+                } while (playerChoise !== "Rock" && playerChoise !== "Paper" && playerChoise !== "Scissors");
+                return playerChoise;
             }
 
             function capitalixe(text)   //capitalaizing the first letter of given string
@@ -31,32 +39,42 @@
                 return text[0].toUpperCase() + LowerText;
             }
 
+            function sayWin(playerChoice, computerChoice)
+            {
+                return `You win! ${playerChoice} beats ${computerChoice}`;
+            }
+
+            function sayLose(playerChoice, computerChoice)
+            {
+                return `You lose! ${computerChoice} beats ${playerChoice}`;
+            }
+
             function playRound(computerChoice, playerChoice)    //the one round of Rock, Paper, Scissors
             {
-                if(computerChoice == "Rock")
+                if(computerChoice === "Rock")
                 {
-                    if(playerChoice == "Paper")
+                    if(playerChoice === "Paper")
                     {
-                        return `You win! ${playerChoice} beats ${computerChoice}`;
+                        return sayWin(playerChoice, computerChoice);
                     }
-                    else if(playerChoice == "Scissors")
+                    else if(playerChoice === "Scissors")
                     {
-                        return `You lose! ${computerChoice} beats ${playerChoice}`;
+                        return sayLose(playerChoice, computerChoice);
                     }
                     else
                     {
                         return "Tie!";
                     }   	
                 }
-                else if(computerChoice == "Paper")
+                else if(computerChoice === "Paper")
                 {
-                    if(playerChoice == "Scissors")
+                    if(playerChoice === "Scissors")
                     {
-                        return `You win! ${playerChoice} beats ${computerChoice}`;
+                        return sayWin(playerChoice, computerChoice);
                     }
-                    else if(playerChoice == "Rock")
+                    else if(playerChoice === "Rock")
                     {
-                        return `You lose! ${computerChoice} beats ${playerChoice}`;
+                        return sayLose(playerChoice, computerChoice);
                     }
                     else
                     {
@@ -64,13 +82,13 @@
                     }	
                 }
                 else{
-                    if(playerChoice == "Rock")
+                    if(playerChoice === "Rock")
                     {
-                        return `You win! ${playerChoice} beats ${computerChoice}`;
+                        return sayWin(playerChoice, computerChoice);
                     }
-                    else if(playerChoice == "Paper")
+                    else if(playerChoice === "Paper")
                     {
-                        return `You lose! ${computerChoice} beats ${playerChoice}`;
+                        return sayLose(playerChoice, computerChoice);
                     }
                     else
                     {
@@ -84,7 +102,7 @@
                 let playerWins = 0;
                 let computerWins = 0;
 
-                while(playerWins != 5 && computerWins != 5)
+                while(playerWins !== 5 && computerWins !== 5)
                 {
                     let winner = playRound(computerPlay(),playerPlay());
                     console.log(winner);
@@ -98,7 +116,7 @@
                     }
                 }
             
-                if (playerWins == 5)
+                if (playerWins === 5)
                 {
                     console.log("The winner is Player!")
                 }
@@ -107,6 +125,9 @@
                     console.log("The winner is Computer!")
                 }
             }
+
+            game();
+
         </script>
     </head>
 </html>
