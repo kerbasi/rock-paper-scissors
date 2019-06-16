@@ -155,12 +155,12 @@
         computerScoreP.textContent = "Computer: " + computerWins;
         if (playerWins === 5) {
           resultP.innerHTML =
-            "<p>Game Over! The winner is Player!</p>To start a new game chosse another move<p>";
+            "<p style='color: red'>Game Over! The winner is Player!</p>To start a new game chosse another move<p>";
           playerWins = 0;
           computerWins = 0;
         } else if (computerWins === 5) {
           resultP.innerHTML =
-            "<p>Game Over! The winner is Computer!</p>To start a new game chosse another move<p>";
+            "<p style='color: red'>Game Over! The winner is Computer!</p>To start a new game chosse another move<p>";
           playerWins = 0;
           computerWins = 0;
         }
