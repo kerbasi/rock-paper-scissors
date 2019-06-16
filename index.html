@@ -1,135 +1,182 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <script>
-            'use srtrict';
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rock Paper Scissprs</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="result"></div>
+    <div class="moves">
+      <button id="rock" class="move">
+        Rock
+      </button>
+      <button id="paper" class="move">
+        Paper
+      </button>
+      <button id="scissors" class="move">
+        Scissors
+      </button>
+    </div>
+    <script>
+      "use srtrict";
 
-            function getRandom(n)   
-            {
-                return Math.random() * n;
-            }
-        
-            function computerPlay()    //randomly return "Rock", "Paper" or "Scissors"
-            {
-                let letPickNum = getRandom(3);
-                return letPickNum < 1 ? "Rock" : letPickNum < 2 ? "Paper" : "Scissors";
-            }
+      let playerWins = 0;
+      let computerWins = 0;
 
-            function playerPlay()      //prompting pleer to choose his object
-            {
-                let playerChoise;
-                do
-                {
-                    playerChoise = prompt("Please choose Rock, Paper or Scissors - >");
-                    if (playerChoise != "")
-                    {
-                        playerChoise = capitalixe(playerChoise)
-                    }
-                } while (playerChoise !== "Rock" && playerChoise !== "Paper" && playerChoise !== "Scissors");
-                return playerChoise;
-            }
+      function getRandom(n) {
+        return Math.random() * n;
+      }
 
-            function capitalixe(text)   //capitalaizing the first letter of given string
-            {
-                let LowerText = "";
-                for (let i = 1, len = text.length; i < len; i++)
-                {
-                    LowerText += text[i].toLowerCase();
-                }
-                return text[0].toUpperCase() + LowerText;
-            }
+      function computerPlay() {
+        //randomly return "Rock", "Paper" or "Scissors"
+        let letPickNum = getRandom(3);
+        return letPickNum < 1 ? "Rock" : letPickNum < 2 ? "Paper" : "Scissors";
+      }
 
-            function sayWin(playerChoice, computerChoice)
-            {
-                return `You win! ${playerChoice} beats ${computerChoice}`;
-            }
+      function playerPlay() {
+        //prompting pleer to choose his object
+        let playerChoise;
+        do {
+          playerChoise = prompt("Please choose Rock, Paper or Scissors - >");
+          if (playerChoise != "") {
+            playerChoise = capitalixe(playerChoise);
+          }
+        } while (
+          playerChoise !== "Rock" &&
+          playerChoise !== "Paper" &&
+          playerChoise !== "Scissors"
+        );
+        return playerChoise;
+      }
 
-            function sayLose(playerChoice, computerChoice)
-            {
-                return `You lose! ${computerChoice} beats ${playerChoice}`;
-            }
+      function capitalixe(text) {
+        //capitalaizing the first letter of given string
+        let LowerText = "";
+        for (let i = 1, len = text.length; i < len; i++) {
+          LowerText += text[i].toLowerCase();
+        }
+        return text[0].toUpperCase() + LowerText;
+      }
 
-            function playRound(computerChoice = computerPlay(), playerChoice = playerPlay())    //the one round of Rock, Paper, Scissors
-            {
-                if (computerChoice === "Rock")
-                {
-                    if (playerChoice === "Paper")
-                    {
-                        return sayWin(playerChoice, computerChoice);
-                    }
-                    else if(playerChoice === "Scissors")
-                    {
-                        return sayLose(playerChoice, computerChoice);
-                    }
-                    else
-                    {
-                        return "Tie!";
-                    }   	
-                }
-                else if (computerChoice === "Paper")
-                {
-                    if (playerChoice === "Scissors")
-                    {
-                        return sayWin(playerChoice, computerChoice);
-                    }
-                    else if(playerChoice === "Rock")
-                    {
-                        return sayLose(playerChoice, computerChoice);
-                    }
-                    else
-                    {
-                        return "Tie!";
-                    }	
-                }
-                else
-                {
-                    if (playerChoice === "Rock")
-                    {
-                        return sayWin(playerChoice, computerChoice);
-                    }
-                    else if (playerChoice === "Paper")
-                    {
-                        return sayLose(playerChoice, computerChoice);
-                    }
-                    else
-                    {
-                        return "Tie!";
-                    }	
-                }  
-            }
+      function sayWin(playerChoice, computerChoice) {
+        return `You win! ${playerChoice} beats ${computerChoice}`;
+      }
 
-            function game()     //plays Rock, Paper, Scissors until 5 wins
-            {
-                let playerWins = 0;
-                let computerWins = 0;
+      function sayLose(playerChoice, computerChoice) {
+        return `You lose! ${computerChoice} beats ${playerChoice}`;
+      }
 
-                while (playerWins !== 5 && computerWins !== 5)
-                {
-                    let winner = playRound();
-                    console.log(winner);
-                    if (winner.search("win!") != -1)
-                    {
-                        playerWins += 1;
-                    }
-                    else if (winner.search("lose") != -1)
-                    {
-                        computerWins += 1;
-                    }
-                }
-            
-                if (playerWins === 5)
-                {
-                    console.log("The winner is Player!")
-                }
-                else
-                {
-                    console.log("The winner is Computer!")
-                }
-            }
+      function playRound(
+        computerChoice = computerPlay(),
+        playerChoice = playerPlay()
+      ) {
+        //the one round of Rock, Paper, Scissors
+        if (computerChoice === "Rock") {
+          if (playerChoice === "Paper") {
+            playerWins += 1;
+            return sayWin(playerChoice, computerChoice);
+          } else if (playerChoice === "Scissors") {
+            computerWins += 1;
+            return sayLose(playerChoice, computerChoice);
+          } else {
+            return "Tie!";
+          }
+        } else if (computerChoice === "Paper") {
+          if (playerChoice === "Scissors") {
+            playerWins += 1;
+            return sayWin(playerChoice, computerChoice);
+          } else if (playerChoice === "Rock") {
+            computerWins += 1;
+            return sayLose(playerChoice, computerChoice);
+          } else {
+            return "Tie!";
+          }
+        } else {
+          if (playerChoice === "Rock") {
+            playerWins += 1;
+            return sayWin(playerChoice, computerChoice);
+          } else if (playerChoice === "Paper") {
+            computerWins += 1;
+            return sayLose(playerChoice, computerChoice);
+          } else {
+            return "Tie!";
+          }
+        }
+      }
 
-            game();
+      function game() {
+        //plays Rock, Paper, Scissors until 5 wins
+        let playerWins = 0;
+        let computerWins = 0;
 
-        </script>
-    </head>
+        while (playerWins !== 5 && computerWins !== 5) {
+          let winner = playRound();
+          console.log(winner);
+          if (winner.search("win!") != -1) {
+            playerWins += 1;
+          } else if (winner.search("lose") != -1) {
+            computerWins += 1;
+          }
+        }
+
+        if (playerWins === 5) {
+          console.log("The winner is Player!");
+        } else {
+          console.log("The winner is Computer!");
+        }
+      }
+
+      //game();
+      const buttons = document.querySelectorAll("button");
+      buttons.forEach(button => button.addEventListener("click", playGame));
+      buttons.forEach(button =>
+        button.addEventListener("transitionend", stopPusing)
+      );
+      function playGame(e) {
+        //console.log(playRound(computerPlay(), capitalixe(e.target.id)));
+        this.classList.add("pushing");
+        const result = document.querySelector("#result");
+        result.textContent = "";
+        const resultP = document.createElement("p");
+        const score = document.createElement("div");
+        const playerScoreP = document.createElement("p");
+        const computerScoreP = document.createElement("p");
+        resultP.textContent = playRound(
+          computerPlay(),
+          capitalixe(e.target.id)
+        );
+        if (playerWins === 5) {
+          resultP.textContent = "The winner is Player!";
+        } else if (computerWins === 5) {
+          resultP.textContent = "The winner is Computer!";
+        }
+        playerScoreP.textContent = "Player: " + playerWins;
+        computerScoreP.textContent = "Computer: " + computerWins;
+        if (playerWins === 5) {
+          resultP.innerHTML =
+            "<p>Game Over! The winner is Player!</p>To start a new game chosse another move<p>";
+          playerWins = 0;
+          computerWins = 0;
+        } else if (computerWins === 5) {
+          resultP.innerHTML =
+            "<p>Game Over! The winner is Computer!</p>To start a new game chosse another move<p>";
+          playerWins = 0;
+          computerWins = 0;
+        }
+        score.textContent = "Score:";
+        score.appendChild(playerScoreP);
+        score.appendChild(computerScoreP);
+        result.appendChild(resultP);
+        result.appendChild(score);
+      }
+
+      function stopPusing(e) {
+        if (e.propertyName !== "transform") {
+          return;
+        }
+        this.classList.remove("pushing");
+      }
+    </script>
+  </body>
 </html>
